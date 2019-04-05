@@ -3,29 +3,31 @@
 <div class="wrapper">
 <center><h1 style="color:black; font-size:50px;">ShaREAD</h1></center>
 
-<form action="/login" method="POST">
+<form action="/register" method="POST">
   <div class="login">
     <div class="login-screen">
       <div class="app-title">
-        <h1>Login</h1>
+        <h1>Register</h1>
       </div>
       <div class="login-form">
         <div class="control-group">
           <input type="text" class="login-field" value="" placeholder="Username" name="username">
           <label class="login-field-icon fui-user" for="login-name"></label></div>
           <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Email" name="email">
+          <label class="login-field-icon fui-user" for="login-name"></label></div>
+
+          <div class="control-group">
             <input type="password" class="login-field" value="" placeholder="Password" name="password">
             <label class="login-field-icon fui-lock" for="login-pass"></label></div>
-            <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
-            
-
+            <input type="submit" value="Sign Up" class="btn btn-primary btn-large btn-block">
+            <!-- {{ form.submit(class="btn btn-primary btn-large btn-block") }} -->
         </div>
         </div>
         <div style="margin:10px 0;">
-           <small style="color:black">Need an account? <span><a href="{{url_for('register')}}">Sign Up</a></span></small>
+           <small style="color:black">Have an account? <span><a href="{{url_for('login')}}">Log In</a></span></small>
         </div>
       </div>
     </form>
 </div>
-
 {% endblock %}

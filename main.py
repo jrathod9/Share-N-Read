@@ -19,25 +19,24 @@ def home():
 	else:
 		return "Hello Boss!"
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET','POST'])
 def login():
-# form = LoginForm()
-	# if form.validate_on_submit():
+	form = LoginForm()
 	con = sqlite3.connect("Database/db.sqlite3")
 	con.row_factory=sqlite3.Row
 	cur = con.cursor()
-	cur.execute("SELECT * FROM users WHERE username=? and password=?",[request.form['username'],request.form['password']])
+	cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
 	pas = cur.fetchall()
-
-	if request.form['username'] == "admin" and request.form['password'] == "password":
-		flash("You have logged in!",'success')
+	if form.username.data == "admin" and form.password.data == "password":
+		flash("Hi Admin!",'success')
 		return redirect(url_for('list'))
 	elif pas is not None:
 		print(pas)
 		return render_template('profile.html',pas = pas)
 	else:
 		flash("Check email or password!",'danger')
-	return render_template('login.html')
+		return render_template('login.html')
+	return render_template('login.html',title='Login',form=form)
 	# title='Login',form=form
 
 
@@ -56,26 +55,46 @@ def list():
 	rows = cur.fetchall()
 	return render_template('list.html',rows = rows)
 
-# @app.route("/register")
-# def register():
-# 	usernm = str(form.request["username"])
-# 	emailid = str(form.email.data)
-# 	passwrd = str(form.password.data)
-# 		# usernm.encode('ascii')
-# 		# emailid.encode('ascii')
-# 		# passwrd.encode('ascii')
-# 	mylist = [usernm,emailid,passwrd]
-# 	print(mylist)
-# 	if request.method == "POST":
-# 		con = sqlite3.connect("Databases/db.sqlite3")
-# 		con.row_factory = sqlite3.Row
-# 		cur = con.cursor()
-# 		cur.execute("INSERT INTO users VALUES(?,?,?)",[usernm,emailid,passwrd])
-# 		con.commit()
-# 		print(cur.fetchall())
-# 	flash("Welcome " + usernm + "!",'success')
-# 	return redirect(url_for('home'))
-# return render_template('register.html',title='Register',form=form)
+@app.route("/register",methods = ['GET','POST'])
+def register():
+	form = RegistrationForm()
+	usernm = str(form.username.data)
+	emailid = str(form.email.data)
+	passwrd = str(form.password.data)
+		# usernm.encode('ascii')
+		# emailid.encode('ascii')
+		# passwrd.encode('ascii')
+	mylist = [usernm,emailid,passwrd]
+	print(mylist)
+	if request.method == "POST":
+		con = sqlite3.connect("Database/db.sqlite3")
+		con.row_factory = sqlite3.Row
+		cur = con.cursor()
+		cur.execute("INSERT INTO users VALUES(?,?,?)",[usernm,emailid,passwrd])
+		con.commit()
+		print(cur.fetchall())	
+		flash("Welcome " + usernm + "! Please Login.",'success')
+		return render_template('login.html')
+	return render_template('register.html',title='Register',form=form)
+
+	# usernm = str(request.form["username"])
+	# emailid = str(request.form["email"])
+	# passwrd = str(request.form["password"])
+		# usernm.encode('ascii')
+		# emailid.encode('ascii')
+		# passwrd.encode('ascii')
+	# mylist = [usernm,emailid,passwrd]
+	# print(mylist)
+	# if request.method == "POST":
+	# 	con = sqlite3.connect("Database/db.sqlite3")
+	# 	con.row_factory = sqlite3.Row
+	# 	cur = con.cursor()
+	# 	cur.execute("INSERT INTO users VALUES(?,?,?)",[usernm,emailid,passwrd])
+	# 	con.commit()
+	# 	print(cur.fetchall())
+	# 	flash("Welcome " + usernm + "!",'success')
+	# 	return redirect(url_for('home'))
+	# return render_template('register.html')
 
 @app.route("/logout")
 def logout():
