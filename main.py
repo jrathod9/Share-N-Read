@@ -21,22 +21,25 @@ def home():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-	form = LoginForm()
-	con = sqlite3.connect("Database/db.sqlite3")
-	con.row_factory=sqlite3.Row
-	cur = con.cursor()
-	cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
-	pas = cur.fetchall()
-	if form.username.data == "admin" and form.password.data == "password":
-		flash("Hi Admin!",'success')
-		return redirect(url_for('list'))
-	elif pas is not None:
-		print(pas)
-		return render_template('profile.html',pas = pas)
+	if request.method == 'POST':
+		form = LoginForm()
+		con = sqlite3.connect("Database/db.sqlite3")
+		con.row_factory=sqlite3.Row
+		cur = con.cursor()
+		cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
+		pas = cur.fetchall()
+		if form.username.data == "admin" and form.password.data == "password":
+			flash("Hi Admin!",'success')
+			return redirect(url_for('list'))
+		elif pas is not None:
+			print(pas)
+			return render_template('profile.html',pas = pas)
+		else:
+			flash("Check email or password!",'danger')
+			return render_template('login.html')
+		return render_template('login.html',title='Login',form=form)
 	else:
-		flash("Check email or password!",'danger')
 		return render_template('login.html')
-	return render_template('login.html',title='Login',form=form)
 	# title='Login',form=form
 
 

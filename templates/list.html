@@ -1,7 +1,9 @@
 {% for row in rows %}
 	<tr>
-		<td>{{row["username"]}}</td>
-		<td>{{row["email"]}}</td>
+		<td>{{row["username"]}}</td><span> --> </span>
+		<td>{{row["email"]}}</td><span> --> </span>
 		<td>{{row["password"]}}</td>
 	</tr>
+	</br>
+	</br>
 {% endfor %}
