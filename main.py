@@ -12,6 +12,8 @@ con = sqlite3.connect('Database/db.sqlite3')
 
 app = Flask(__name__)
 
+sessionuser = ''
+
 @app.route('/')
 def home():
 	if not session.get('logged_in'):
@@ -32,7 +34,9 @@ def login():
 			flash("Hi Admin!",'success')
 			return redirect(url_for('list'))
 		elif pas is not None:
-			print(pas)
+			for ele in pas:
+				sessionuser = ele["username"]
+				print(sessionuser)
 			return render_template('profile.html',pas = pas)
 		else:
 			flash("Check email or password!",'danger')
@@ -61,6 +65,7 @@ def list():
 @app.route("/register",methods = ['GET','POST'])
 def register():
 	form = RegistrationForm()
+	sessionuser = ''
 	usernm = str(form.username.data)
 	emailid = str(form.email.data)
 	passwrd = str(form.password.data)
@@ -73,7 +78,7 @@ def register():
 		con = sqlite3.connect("Database/db.sqlite3")
 		con.row_factory = sqlite3.Row
 		cur = con.cursor()
-		cur.execute("INSERT INTO users VALUES(?,?,?)",[usernm,emailid,passwrd])
+		cur.execute("INSERT INTO users VALUES(?,?,?,?,?,?,?)",[usernm,emailid,passwrd,"","","",""])
 		con.commit()
 		print(cur.fetchall())	
 		flash("Welcome " + usernm + "! Please Login.",'success')
@@ -102,6 +107,7 @@ def register():
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
+    sessionuser = ''
     return home()
 
 if __name__ == "__main__":
