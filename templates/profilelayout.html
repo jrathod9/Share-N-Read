@@ -167,7 +167,7 @@ transform:scale(1.2);
 
 	<div class="headerwrap">
 		<input type="submit" value="Edit Profile" class="btn btn-primary btn-large btn-block">
-		<input type="submit" value="Requests" class="btn-right btn-primary">
+		<input type="submit" value="Requests" class="btn-right btn-primary" onclick="window.location.href='{{ url_for( 'requests') }}';">
 		<img class="dp" src="/static/dp.png" height="100px" width="100px">
 		<a  class="logoutbtn" style="color: red;" href="logout">Logout</a>
 		{% block displayname %}

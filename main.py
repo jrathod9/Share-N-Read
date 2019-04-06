@@ -20,6 +20,15 @@ def home():
 		return render_template('login.html')
 	else:
 		return "Hello Boss!"
+@app.route('/requests',methods=['GET','POST'])
+def requests():
+	print(sessionuser)
+	con = sqlite3.connect("Database/db.sqlite3")
+	con.row_factory=sqlite3.Row
+	cur = con.cursor()
+	cur.execute("SELECT * FROM requests WHERE owner = ?",[sessionuser])
+	requestlist = cur.fetchall()
+	return render_template('requests.html',requestlist = requestlist);
 
 @app.route('/login', methods=['GET','POST'])
 def login():

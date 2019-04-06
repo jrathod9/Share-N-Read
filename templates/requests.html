@@ -85,64 +85,23 @@ body {
 		<div class="req-title">
 			<h1>Requests</h1>
 		</div>
-		<div class="card">
-			<img class="profileimg" src="profile.jpg" height="30px" width="30px">
-			<div class="user-details">
-				Name</br>
-				Username </br>
-				Date  				
-			</div>
-			<div class = "accept">
-				<ul style="list-style: none;">
-					<li><img class = "bttn" src="accept.png" height="40px" width="40px"></li>
-					<li><img class = "bttn" src="reject.png" height="40px" width="40px"></li>
-				</ul>
-			</div>	
-		</div>
 
+		{% for item in requestlist %}
 		<div class="card">
-			<img class="profileimg" src="profile.jpg" height="30px" width="30px">
+			<img class="profileimg" src="static/profile.jpg" height="30px" width="30px">
 			<div class="user-details">
-				Name</br>
-				Username </br>
-				Date  				
+				{{item["book"]}}</br>
+				{{item["requester"]}} </br>
+				{{item["req_date"]}}  				
 			</div>
 			<div class = "accept">
 				<ul style="list-style: none;">
-					<li><img class = "bttn" src="accept.png" height="40px" width="40px"></li>
-					<li><img class = "bttn" src="reject.png" height="40px" width="40px"></li>
+					<li><img class = "bttn" src="static/accept.png" height="40px" width="40px"></li>
+					<li><img class = "bttn" src="static/reject.png" height="40px" width="40px"></li>
 				</ul>
 			</div>	
 		</div>
-
-		<div class="card">
-			<img class="profileimg" src="profile.jpg" height="30px" width="30px">
-			<div class="user-details">
-				Name</br>
-				Username </br>
-				Date  				
-			</div>
-			<div class = "accept">
-				<ul style="list-style: none;">
-					<li><img class = "bttn" src="accept.png" height="40px" width="40px"></li>
-					<li><img class = "bttn" src="reject.png" height="40px" width="40px"></li>
-				</ul>
-			</div>	
-		</div>
-
-		<div class="card">
-			<img class="profileimg" src="profile.jpg" height="30px" width="30px">
-			<div class="user-details">
-				Name</br>
-				Username </br>
-				Date  				
-			</div>
-			<div class = "accept">
-				<ul style="list-style: none;">
-					<li><img class = "bttn" src="accept.png" height="40px" width="40px"></li>
-					<li><img  class = "bttn" src="reject.png" height="40px" width="40px"></li>
-				</ul>
-			</div>	
-		</div>
+		{% endfor %}
+		
 
 	</div>
