@@ -119,6 +119,7 @@ margin-top: 10%;
 	margin-left: 10px;
 	background-color: white;
 	transition-duration: 0.3s;
+	box-shadow: 5px 0 24px;
 }
 
 .card:hover{
@@ -144,20 +145,32 @@ margin-top: 10%;
 
 .reqbtn:hover{
 	background-color: #248232;
+	cursor: pointer;
 }
 
 .recommendations{
 	display: inline;
 }
+
+.addbtn{
+	transition-duration: 0.3s;
+}
+.addbtn:hover{
+transform:scale(1.2);
+}
+
 </style>
 
 <div class="wrapper">
+
+	<img class = "addbtn" title="Add Book" src="/static/addbutton.png" height="65px" width="65px" style="position: fixed;margin-top: 440px; margin-left: 1150px; z-index: 1000">
+
 	<div class="headerwrap">
 		<input type="submit" value="Edit Profile" class="btn btn-primary btn-large btn-block">
 		<input type="submit" value="Requests" class="btn-right btn-primary">
 		<img class="dp" src="/static/dp.png" height="100px" width="100px">
 		<a  class="logoutbtn" style="color: red;" href="logout">Logout</a>
-		{% block username %}
+		{% block displayname %}
 		{% endblock %}
 	</div>
 	<div class="linebr"></div>
@@ -251,5 +264,5 @@ margin-top: 10%;
 	</div>
 	<h2>My Books</h2>
 	{% block content %}
-	{% endblock %}
+	{% endblock content %}
 </div>

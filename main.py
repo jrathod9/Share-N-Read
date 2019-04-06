@@ -30,6 +30,11 @@ def login():
 		cur = con.cursor()
 		cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
 		pas = cur.fetchall()
+		cur.execute("SELECT * FROM books WHERE username=?",[form.username.data])
+		books = cur.fetchall()
+		mylist = [form.username.data,books]
+		# for ele in pas:
+		# 	print(ele)
 		if form.username.data == "admin" and form.password.data == "password":
 			flash("Hi Admin!",'success')
 			return redirect(url_for('list'))
@@ -37,7 +42,7 @@ def login():
 			for ele in pas:
 				sessionuser = ele["username"]
 				print(sessionuser)
-			return render_template('profile.html',pas = pas)
+			return render_template('profile.html',mylist = mylist)
 		else:
 			flash("Check email or password!",'danger')
 			return render_template('login.html')

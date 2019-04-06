@@ -1,29 +1,26 @@
 <link href="https://fonts.googleapis.com/css?family=Dokdo|Pacifico" rel="stylesheet">
 {% extends "profilelayout.html" %}
 
-{% block username%}
-	{% for ele in pas %}
-		<center><h3 style="font-family: 'Pacifico',cursive;"><span>@</span> {{ele["username"]}}</h3></center>
-	{% endfor %}
+{% block displayname %}
+	<center><h3 style="font-family: 'Pacifico',cursive;"><span>@</span> {{mylist[0]}}</h3></center>
 {% endblock %}
 
 
 {% block content %}
-	<div class="recommendations">
-		<div class="card">
+	{% for book in mylist[1] %}
+		<div class="card" style="font-size: 13px;padding-left: 2px">
 			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
 			<div class="infowrapper">
-				<ul style="list-style: none;">
-					<li>Name</li>
-					<li>Genre</li>
-					<li>Author</li>
-					<li>Owner</li>
+				<ul>
+					<li>{{book["name"]}}</li>
+					<li>{{book["genre"]}}</li>
+					<li>{{book["author"]}}</li>
+					<li>{{book["username"]}}</li>
 				</ul>
 			</div>
-			<div class="reqbtn">
+			<div class="reqbtn" style="width: 109%;margin-left:-2px;">
 				Request
 			</div>
 		</div>
-	</div>
-
-{% endblock %}
+	{% endfor %}
+{% endblock content %}
