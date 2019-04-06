@@ -1,7 +1,11 @@
-{% for ele in pas %}
-	<tr>
-		<h1>WELCOME <span> <td>{{ele["username"]}}</td></span></h1>
-	</tr>
-{% endfor %}
+<link href="https://fonts.googleapis.com/css?family=Dokdo|Pacifico" rel="stylesheet">
+{% extends "profilelayout.html" %}
+
+{% block username%}
+	{% for ele in pas %}
+		<center><h3 style="font-family: 'Pacifico',cursive;"><span>@</span> {{ele["username"]}}</h3></center>
+	{% endfor %}
+{% endblock %}
+
 
  
