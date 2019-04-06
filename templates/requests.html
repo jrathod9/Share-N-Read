@@ -85,8 +85,9 @@ body {
 		<div class="req-title">
 			<h1>Requests</h1>
 		</div>
-
+		{% if requestlist %}
 		{% for item in requestlist %}
+		{% if item["action"] == "pending" %}
 		<div class="card">
 			<img class="profileimg" src="static/profile.jpg" height="30px" width="30px">
 			<div class="user-details">
@@ -101,7 +102,13 @@ body {
 				</ul>
 			</div>	
 		</div>
+		{% else %}
+		<center><h2 style="color: white;">No requests pending!</h2></center>
+		{% endif %}
 		{% endfor %}
-		
+		{% else %}
+		<center><h2 style="color: white;">No requests pending!</h2></center>
+		{% endif %}
 
+		
 	</div>

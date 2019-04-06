@@ -1,4 +1,16 @@
 <link href="https://fonts.googleapis.com/css?family=Dokdo|Pacifico" rel="stylesheet">
+<style type="text/css">
+
+.mybooks{
+	transition-duration: 0.3s;
+	box-shadow: 5px 0 50px;
+}
+.mybooks:hover{
+	transform:scale(1.1);
+}	
+
+</style>
+
 {% extends "profilelayout.html" %}
 
 {% block displayname %}
@@ -7,8 +19,9 @@
 
 
 {% block content %}
+	<div style="display: inline-block;">
 	{% for book in mylist[1] %}
-		<div class="card" style="font-size: 13px;padding-left: 2px">
+		<div class = "mybooks" style="font-size: 13px; margin-top: 0; position: relative; margin-left: 5px;background-color: white; border-radius: 10px; width: 150px;height:200px;padding-top: 10px;display: inline-block;">
 			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
 			<div class="infowrapper">
 				<ul>
@@ -18,9 +31,7 @@
 					<li>{{book["username"]}}</li>
 				</ul>
 			</div>
-			<div class="reqbtn" style="width: 109%;margin-left:-2px;">
-				Request
-			</div>
 		</div>
 	{% endfor %}
+	</div>
 {% endblock content %}

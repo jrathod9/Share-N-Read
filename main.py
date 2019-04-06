@@ -1,5 +1,5 @@
 from flask import Flask, flash, redirect, url_for, render_template, request, session, abort
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, BookForm 
 import os
 import sqlite3
 #SAMPLE DATABASE
@@ -22,11 +22,13 @@ def home():
 		return "Hello Boss!"
 @app.route('/requests',methods=['GET','POST'])
 def requests():
-	print(sessionuser)
 	con = sqlite3.connect("Database/db.sqlite3")
 	con.row_factory=sqlite3.Row
 	cur = con.cursor()
-	cur.execute("SELECT * FROM requests WHERE owner = ?",[sessionuser])
+	cur.execute("SELECT * FROM currentsession")
+	sessionuser = cur.fetchall()
+	# print(sessionuser["username"])
+	cur.execute("SELECT * FROM requests WHERE owner = ?",[sessionuser["username"]])
 	requestlist = cur.fetchall()
 	return render_template('requests.html',requestlist = requestlist);
 
@@ -48,6 +50,8 @@ def login():
 			flash("Hi Admin!",'success')
 			return redirect(url_for('list'))
 		elif pas is not None:
+			cur.execute("INSERT INTO currentsession VALUES(?)",[mylist[0]])
+			con.commit()
 			for ele in pas:
 				sessionuser = ele["username"]
 				print(sessionuser)
@@ -67,8 +71,32 @@ def login():
 # 	else:
 # 		flash('wrong password!')
 # 	return home()
+@app.route("/addbook",methods=['GET','POST'])
+def addbook():
+	form = BookForm()
+	name = str(form.name.data)
+	author = str(form.author.data)
+	ISBN = form.ISBN.data
+	genre = str(form.genre.data)
+	if request.method == "POST":
+		con = sqlite3.connect("Database/db.sqlite3")
+		con.row_factory = sqlite3.Row
+		cur = con.cursor()
+		cur.execute("SELECT * FROM currentsession")
+		tempvar = cur.fetchone()
+		username = tempvar["username"]
+		cur.execute("INSERT INTO books VALUES(?,?,?,?,?,?,?)",[username,name,author,ISBN,"live","",genre])
+		cur.commit()
+		cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
+		pas = cur.fetchall()
+		cur.execute("SELECT * FROM books WHERE username=?",[form.username.data])
+		books = cur.fetchall()
+		mylist = [form.username.data,books]
+		flash("Book Added",'success')
+	return render_template('addbook.html',form=form)	
 @app.route("/list")
 def list():
+	print(sessionuser)
 	con = sqlite3.connect("Database/db.sqlite3")
 	con.row_factory=sqlite3.Row
 	cur = con.cursor()
@@ -120,9 +148,24 @@ def register():
 
 @app.route("/logout")
 def logout():
-    session['logged_in'] = False
-    sessionuser = ''
-    return home()
+	con = sqlite3.connect("Database/db.sqlite3")
+	con.row_factory=sqlite3.Row
+	cur = con.cursor()
+	cur.execute("DELETE FROM currentsession")
+	con.commit()
+	sessionuser = ''
+	session['logged_in'] = False
+	return home()
+
+@app.route("/search")
+def search():
+	
+	query = str(form.search.data)
+	con = sqlite3.connect("Database/db.sqlite3")
+	cur = con.cursor()
+	cur.execute("SELECT * FROM books WHERE name=?",[query])
+	results = cur.fetchall()
+	return render_template('search.html',results = results,form = form)
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)

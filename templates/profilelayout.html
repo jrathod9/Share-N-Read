@@ -114,6 +114,7 @@ margin-top: 10%;
 	height: 208px;
 	width: 150px;
 	/*border:2px solid black;*/
+	margin-top: 0;
 	border-radius: 10px;
 	padding: 10px;
 	margin-left: 10px;
@@ -149,7 +150,8 @@ margin-top: 10%;
 }
 
 .recommendations{
-	display: inline;
+	display: inline-block;
+	position: relative;
 }
 
 .addbtn{
@@ -163,7 +165,7 @@ transform:scale(1.2);
 
 <div class="wrapper">
 
-	<img class = "addbtn" title="Add Book" src="/static/addbutton.png" height="65px" width="65px" style="position: fixed;margin-top: 440px; margin-left: 1150px; z-index: 1000">
+	<img onclick="window.location.href='{{ url_for( 'addbook') }}';" class = "addbtn" title="Add Book" src="/static/addbutton.png" height="65px" width="65px" style="position: fixed;margin-top: 440px; margin-left: 1150px; z-index: 1000;">
 
 	<div class="headerwrap">
 		<input type="submit" value="Edit Profile" class="btn btn-primary btn-large btn-block">
@@ -263,6 +265,8 @@ transform:scale(1.2);
 		</div>
 	</div>
 	<h2>My Books</h2>
+	<div class="recommendations" style="width:1000px;margin-top: 0; padding-top: 0; display: inline-block;">
 	{% block content %}
 	{% endblock content %}
+	</div>
 </div>

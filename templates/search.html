@@ -1,0 +1,15 @@
+<link rel="stylesheet" type="text/css" href="static/style.css">
+<form action="/search" method="POST">
+
+<div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Book Name" name="search">
+          <label class="login-field-icon fui-user" for="login-name"></label></div>
+
+<button type="submit">Search</button>
+</form>
+
+{% for result in results %}
+
+	{{ result["owner"] }}<br>
+	{{ result["name"]}}
+{% endfor %}

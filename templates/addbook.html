@@ -16,7 +16,7 @@ padding: 50px;
 }
 .login {
 margin: 20px auto;
-width: 300px;
+width: 600px;
 }
 .login-screen {
 background-color: #FFF;
@@ -44,7 +44,7 @@ border-radius: 3px;
 font-size: 16px;
 font-weight: 200;
 padding: 10px 0;
-width: 250px;
+width: 500px;
 transition: border .5s;
 }
  
@@ -66,7 +66,7 @@ border-radius: 3px;
 box-shadow: none;
 transition: 0.25s;
 display: block;
-width: 250px;
+width: 100px;
 margin: 0 auto;
 }
  
@@ -95,23 +95,33 @@ margin-top: 12px;
   <div class="login">
     <div class="login-screen">
       <div class="app-title">
-        <h1>Login</h1>
+        <h1>Add Book</h1>
       </div>
       <div class="login-form">
         <div class="control-group">
-          <input type="text" class="login-field" value="" placeholder="Username" name="username">
+          <input type="text" class="login-field" value="" placeholder="Name" name="name">
           <label class="login-field-icon fui-user" for="login-name"></label></div>
           <div class="control-group">
-            <input type="password" class="login-field" value="" placeholder="Password" name="password">
-            <label class="login-field-icon fui-lock" for="login-pass"></label></div>
-            <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
-            
-
+          <input type="text" class="login-field" value="" placeholder="Author" name="author">
+          <label class="login-field-icon fui-user" for="login-name"></label></div>
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="ISBN" name="ISBN">
+          <label class="login-field-icon fui-user" for="login-name"></label></div>
+          <div class="control-group">
+          <input type="text" class="login-field" value="" placeholder="Genre" name="genre">
+          <label class="login-field-icon fui-user" for="login-name"></label></div>
+          <div class="control-group">
+            <input type="submit" value="Add" class="btn btn-primary btn-large btn-block">
         </div>
+      </div>
+      </div>
+      </div>
         </div>
+        <center>
         <div style="margin:10px 0;">
-           <small style="color:black">Need an account? <span><a href="{{url_for('register')}}">Sign Up</a></span></small>
+           <small style="color:black"><span><a href="{{url_for('login')}}">Cancel</a></span></small>
         </div>
+      </center>
       </div>
     </form>
 </div>
