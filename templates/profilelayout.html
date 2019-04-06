@@ -109,7 +109,46 @@ display: inline;
 margin-left: 36%;
 margin-top: 10%;
 }
+.card{
+	display: inline-block;
+	height: 208px;
+	width: 150px;
+	/*border:2px solid black;*/
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 10px;
+	background-color: white;
+	transition-duration: 0.3s;
+}
 
+.card:hover{
+	transform:scale(1.1);
+}
+.cardimage{
+	margin-left:23%;
+}
+
+.reqbtn{
+	/*border:1px solid black;*/
+	width: 116%;
+	height: 19%;
+	margin-top: -8%;
+	margin-left: -8%;
+	padding-left: 32%;
+	padding-top: 5%;
+	background-color: #2BA84A;
+	transition-duration: 0.3s;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+.reqbtn:hover{
+	background-color: #248232;
+}
+
+.recommendations{
+	display: inline;
+}
 </style>
 
 <div class="wrapper">
@@ -123,7 +162,94 @@ margin-top: 10%;
 	</div>
 	<div class="linebr"></div>
 
-	
-{% block content %}
-{% endblock %}
+	<h2>Recommendations</h2>
+	<div class="recommendations">
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+		<div class="card">
+			<img class="cardimage" src="/static/book(1).png" height="70px" width="70px">
+			<div class="infowrapper">
+				<ul style="list-style: none;">
+					<li>Name</li>
+					<li>Genre</li>
+					<li>Author</li>
+					<li>Owner</li>
+				</ul>
+			</div>
+			<div class="reqbtn">
+				Request
+			</div>
+		</div>
+	</div>
+	<h2>My Books</h2>
+	{% block content %}
+	{% endblock %}
 </div>
