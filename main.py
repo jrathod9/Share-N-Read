@@ -19,7 +19,7 @@ def home():
 	if not session.get('logged_in'):
 		return render_template('login.html')
 	else:
-		return "Hello Boss!"
+		return "Hello"
 @app.route('/requests',methods=['GET','POST'])
 def requests():
 	con = sqlite3.connect("Database/db.sqlite3")
@@ -27,8 +27,10 @@ def requests():
 	cur = con.cursor()
 	cur.execute("SELECT * FROM currentsession")
 	sessionuser = cur.fetchall()
-	# print(sessionuser["username"])
-	cur.execute("SELECT * FROM requests WHERE owner = ?",[sessionuser["username"]])
+	print(type(sessionuser[0]))
+	sess = sessionuser[0]
+	cur.execute("SELECT * FROM requests WHERE owner = ?",[sess["username"]])
+	# sessionuser["username"]
 	requestlist = cur.fetchall()
 	return render_template('requests.html',requestlist = requestlist);
 
@@ -40,7 +42,7 @@ def login():
 		con.row_factory=sqlite3.Row
 		cur = con.cursor()
 		cur.execute("SELECT * FROM users WHERE username=? and password=?",[form.username.data,form.password.data])
-		pas = cur.fetchall()
+		pas = cur.fetchone()
 		cur.execute("SELECT * FROM books WHERE username=?",[form.username.data])
 		books = cur.fetchall()
 		mylist = [form.username.data,books]
@@ -52,16 +54,12 @@ def login():
 		elif pas is not None:
 			cur.execute("INSERT INTO currentsession VALUES(?)",[mylist[0]])
 			con.commit()
-			for ele in pas:
-				sessionuser = ele["username"]
-				print(sessionuser)
 			return render_template('profile.html',mylist = mylist)
 		else:
 			flash("Check email or password!",'danger')
+			print("Wrong id pass!")
 			return render_template('login.html')
 		return render_template('login.html',title='Login',form=form)
-	else:
-		return render_template('login.html')
 	# title='Login',form=form
 
 
@@ -159,7 +157,7 @@ def logout():
 
 @app.route("/search")
 def search():
-	
+
 	query = str(form.search.data)
 	con = sqlite3.connect("Database/db.sqlite3")
 	cur = con.cursor()
