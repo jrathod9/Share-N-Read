@@ -9,14 +9,11 @@ People can then share books with each other and build a huge readers community.
 
 ```
 git clone https://github.com/jrathod9/Share-N-Read.git
-```
-```
+
 cd Share-N-Read
-```
-```
+
 python main.py  
-```
-```
+
 Run the site on port 4000 (localhost:4000)
 ```
 
@@ -25,8 +22,7 @@ Run the site on port 4000 (localhost:4000)
 Install Flask and Flask-WT-Forms
 ```
 pip install Flask
-```
-```
+
 pip install Flask-WTF
 ```
 
